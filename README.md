@@ -1,4 +1,5 @@
-```mermaidgraph TB
+```mermaid
+graph TB
     subgraph CLIENT["CLIENT LAYER"]
         C1[Client 1]:::client
         C2[Client 2]:::client
