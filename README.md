@@ -1,5 +1,4 @@
-```mermaid
-graph TB
+```mermaidgraph TB
     subgraph CLIENT["CLIENT LAYER"]
         C1[Client 1]:::client
         C2[Client 2]:::client
@@ -7,14 +6,14 @@ graph TB
         CN[Client N]:::client
     end
 
-    subgraph SERVER["SERVER LAYER"]
-        TCP[TCP Server<br/>Listen on port 6379<br/>Accept connections<br/>Spawn handlers]:::server
+    subgraph SERVER["🟦 SERVER LAYER - Boost.Asio Networking"]
+        TCP[Server Class<br/>tcp::acceptor on port 6379<br/>async_accept connections<br/>Create Connection objects]:::server
     end
 
-    subgraph EVENTLOOP["EVENT LOOP LAYER"]
-        EPOLL[epoll/kqueue Event Loop]:::eventloop
-        READ[READABLE Events<br/>Data ready<br/>New commands]:::event
-        WRITE[WRITABLE Events<br/>Buffer space<br/>Send response]:::event
+    subgraph EVENTLOOP["🔶 EVENT LOOP LAYER - io_context"]
+        EPOLL[io_context.run<br/>Handles epoll/kqueue<br/>Non-blocking I/O multiplexing]:::eventloop
+        READ[READABLE Events<br/>async_read_some<br/>Data ready]:::event
+        WRITE[WRITABLE Events<br/>async_write<br/>Send response]:::event
         EPOLL --- READ
         EPOLL --- WRITE
     end
@@ -72,5 +71,4 @@ graph TB
     classDef cmd fill:#EC7063,stroke:#C0392B,stroke-width:2px,color:#fff
     classDef storage fill:#16A085,stroke:#0E6655,stroke-width:3px,color:#fff
     classDef shard fill:#48C9B0,stroke:#1ABC9C,stroke-width:2px,color:#fff
-
     ```
