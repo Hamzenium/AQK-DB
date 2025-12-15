@@ -1,15 +1,14 @@
 #pragma once
-
+#include "command/Command.h"
+#include "storage/KVStore.h"
 #include <string>
-#include "Command.h"
-#include "KVStore.h"
 
 class CommandDispatcher {
 public:
-    CommandDispatcher(KVStore& store);
-
+    explicit CommandDispatcher(KVStore& store);
     std::string execute(Command cmd);
 
 private:
     KVStore& store_;
 };
+

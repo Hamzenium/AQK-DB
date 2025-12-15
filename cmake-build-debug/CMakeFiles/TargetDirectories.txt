@@ -1,0 +1,3 @@
+/Users/muhammadhamzasohail/Desktop/AQK-DB/cmake-build-debug/CMakeFiles/AQ_DB.dir
+/Users/muhammadhamzasohail/Desktop/AQK-DB/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/muhammadhamzasohail/Desktop/AQK-DB/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,26 +1,20 @@
-#include "KVStore.h"
+#include "storage/KVStore.h"
 #include <functional>
 
-KVStore::KVStore(int numShards) {
-    shards.resize(numShards);
+KVStore::KVStore(int shards) : shards_(shards) {}
+
+int KVStore::shard_for(const std::string& key) {
+    return std::hash<std::string>{}(key) % shards_.size();
 }
 
-int KVStore::getShardIndex(const std::string& key) {
-    std::hash<std::string> hashFn;
-    return hashFn(key) % shards.size();
-}
-
-std::string KVStore::get(const std::string& key) {
-    int idx = getShardIndex(key);
-    return shards[idx].get(key);
+bool KVStore::get(const std::string& key, std::string& out) {
+    return shards_[shard_for(key)].get(key, out);
 }
 
 void KVStore::set(const std::string& key, const std::string& value) {
-    int idx = getShardIndex(key);
-    shards[idx].set(key, value);
+    shards_[shard_for(key)].set(key, value);
 }
 
 bool KVStore::del(const std::string& key) {
-    int idx = getShardIndex(key);
-    return shards[idx].del(key);
+    return shards_[shard_for(key)].del(key);
 }
